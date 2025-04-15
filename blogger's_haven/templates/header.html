@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'css/header.css' %}">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+  <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+ 
+
+</head>
+<body>
+  
+<nav>
+  <ul class="sidebar">
+    <li onclick="closeSidebar()"><a href="#"><img src="/static/images/cross.png"  /></a></li>
+    <li><a href="{% url "home" %}">Home</a></li>
+    <li><a href="{% url "create_post" %}"> Create Blog</a></li>
+    <li><a href="{% url "contact" %}">About</a></li>
+    <li><a href="{% url 'user_login' %}">Login</a></li>
+  </ul>
+  <ul>
+    <li><a href="#">Blogger's_Haven</a></li>
+    <li class="hide"><a href="{% url "home" %}">Home</a></li>
+    <li class="hide"><a href="{% url 'create_post' %}">Create Blog</a></li>
+    <li class="hide"><a href=" {% url 'contact' %}">About</a></li>
+    <li class="hide"><a href="{% url 'user_login' %}">Login</a></li>
+    <li class="menubtn" onclick="showSidebar()">
+      <a href="#"><img src="/static/images/menu.png" /></a>
+    </li>
+    <li><button class="darkbtn" onclick="darkmode()">🖤</button></li>
+  </ul>
+</nav>
+<script>
+  function showSidebar() {
+    document.querySelector(".sidebar").style.display = "flex";
+  }
+
+  function closeSidebar() {
+    document.querySelector(".sidebar").style.display = "none";
+  }
+
+  function darkmode() {
+    document.body.classList.toggle("dark");
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+   
+
+    {% block content %}
+    
+
+    
+    
+    <style>
+        #first {
+            
+    
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        #second {
+           
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+    
+        #second h2 {
+            text-align: center;
+            color: #2f4f4f;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+       body.dark #second{
+        background: #2a2a2a;
+       }
+
+       body.dark #second h2 {
+        color: #f1f1f1;
+    }
+
+        .title {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border:1px solid #000000;
+            margin-bottom: 10px;
+            background-color: #f9f7f7;
+        }
+    
+    
+        .textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #000000;
+            margin-bottom: 10px;
+            height: 150px;
+            background-color: #f9f7f7;
+        }
+        .submit {
+            background-color: rgba(9, 8, 8, 0.77);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+    
+        .submit:hover {
+            background-color:rgba(50, 49, 49, 0.77);
+        }
+    
+        .file {
+            background-color:rgba(9, 8, 8, 0.77);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .file:hover {
+            background-color:rgba(50, 49, 49, 0.77);
+      
+    </style>
+    
+    <div id="first">
+        <div id="second">
+            <h2>Create New Post</h2>
+    
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+    
+                <label for="title">Post Title</label>
+                <input class="title" type="text" name="title" id="title" placeholder="Enter post title" required>
+    
+                <label for="content">Post Content</label>
+                <textarea class="textarea" name="content" id="content" placeholder="Write the content of your post..." required></textarea>
+    
+                <label for="image">Post Image</label>
+                <input class="file" type="file" name="image" id="image" accept="image/*" required>
+    
+                <button class="submit" type="submit">Create Post</button>
+            </form>
+        </div>
+    </div>
+    
+    {% endblock %}
+    

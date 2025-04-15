@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="login-container">
+    <div class="login-box">
+        <h2>You have been logged out successfully</h2>
+        <p>Redirecting to the login page...</p>
+        <script>
+            setTimeout(function() {
+                window.location.href = "{% url 'login' %}";  
+            }, 3000); 
+        </script>
+    </div>
+</div>
+{% endblock %}

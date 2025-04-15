@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+   
+    body {
+       
+        background-color: #f4f4f4;
+        margin-top: 70px;
+        padding: 0;
+    }
+
+  
+    .post-content {
+        max-width: 800px;
+        margin: 60px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+   
+    .post-content h1 {
+        color: #333;
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 10px;
+    }
+
+   
+    .post-content p {
+        color: #555;
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 15px;
+    }
+
+
+    .post-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+   
+    .post-content p {
+        font-weight: bold;
+    }
+
+    
+    .post-content form button {
+       
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    
+    .post-content h2 {
+        font-size: 1.5em;
+        margin-top: 30px;
+        color: #333;
+    }
+
+    
+    .post-content ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .post-content li {
+        background-color: #f9f9f9;
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-content li strong {
+        color: #333;
+    }
+
+    .post-content li small {
+        color: #777;
+        font-size: 0.9em;
+    }
+
+  
+    .post-content form input, .post-content form textarea {
+        width: 50%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    .post-content form input {
+        width: 50%;
+    }
+
+    .post-content form button {
+        width: 100%;
+        background-color: #0056b3;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .post-content form button:hover {
+        background-color: #0056b3;
+    }
+
+   
+    .post-content button img {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+    }
+</style>
+
+<div class="post-content">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.body }}</p>
+
+    {% if post.image %}
+    <img src="{{ post.image.url }}" alt="{{ post.title }}">
+    {% endif %}
+
+    <p>Likes: {{ post.likes }}</p>
+    <form method="post" action="{% url 'like_post' post.id %}">
+        {% csrf_token %}
+        <button type="submit">
+            <img class="like-button" src="/static/images/like.png" alt="Like">
+        </button>
+    </form>
+
+    <h2>Comments</h2>
+    <ul>
+        {% for comment in comments %}
+            <li>
+                <strong>{{ comment.author }}:</strong> {{ comment.body }}
+                <br>
+                <small style="color:black">Posted on: {{ comment.created_on }}</small>
+            </li>
+        {% empty %}
+            <li>No comments yet.</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Add a Comment</h2>
+    <form method="post" action="{% url 'add_comment' post.id %}">
+        {% csrf_token %}
+        <input type="text" name="author" placeholder="Your Name" required>
+        <textarea name="body" placeholder="Your Comment" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
